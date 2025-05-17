@@ -13,7 +13,7 @@ The purpose of this workshop is to gain hands-on experience in designing ER diag
 ### 🔹 Scenario 1: University Database
 Design a database to manage students, instructors, programs, courses, and student enrollments. Include prerequisites for courses.
 
-*User Requirements:*
+**User Requirements:**
 - Academic programs grouped under departments.
 - Students have admission number, name, DOB, contact info.
 - Instructors with staff number, contact info, etc.
@@ -26,7 +26,7 @@ Design a database to manage students, instructors, programs, courses, and studen
 ### 🔹 Scenario 2: Hospital Database
 Design a database for patient management, appointments, medical records, and billing.
 
-*User Requirements:*
+**User Requirements:**
 - Patient details including contact and insurance.
 - Doctors and their departments, contact info, specialization.
 - Appointments with reason, time, patient-doctor link.
@@ -45,60 +45,41 @@ Design a database for patient management, appointments, medical records, and bil
    - Why you chose the entities and relationships.
    - How you modeled prerequisites or billing.
 
-# ER Diagram Submission - Student Name
-# Name: Prasanna R
-# Reg.no:212222040120 
-# Scenario Chosen:
+# ER Diagram Submission - Rahul V
+
+## Scenario Chosen:
 University 
+
 ## ER Diagram:
-![image](https://github.com/user-attachments/assets/9177c06b-a61a-4691-afaa-ecdd1e051a16)
+![Screenshot 2025-05-06 112346](https://github.com/user-attachments/assets/44d8dc7c-7a8e-4ad1-92c0-79c5df26bc14)
+
+
 
 ## Entities and Attributes:
+Student-(Register No, Name, dob, EmailId, Mobile No)
 
-# Students:
-Attributes: StudentID, FirstName, LastName, DateOfBirth, Email, PhoneNumber, EnrollmentDate, DepartmentID.
-# Faculty:
-Attributes: FacultyID, FirstName, LastName, Email, PhoneNumber, HireDate, DepartmentID.
-# Department:
-Attributes: DepartmentID, DepartmentName, Location.
-# Course:
-Attributes: CourseID, CourseName, CourseCode, Credits, DepartmentID.
-# Enrollment:
-Attributes: EnrollmentID, StudentID, CourseID, EnrollmentDate, Grade.
-# Class:
-Attributes: ClassID, CourseID, FacultyID, Semester, Year, Schedule.
-# Advising:
-Attributes: AdvisingID, StudentID, FacultyID, AdvisingDate.
+Department -(department name, hod)
+
+Course-(course name, course no, no. of credits)
+
+Faculty- (Staff Id, mobile no, name, email)
+
+Prerequisite Courses- (course name, credits)
+
 
 ## Relationships and Constraints:
-
-## Student–Advising–Faculty:
-Relationship: Advises Cardinality: Many-to-Many (each student can have multiple advisors, each faculty can advise multiple students) Participation: Total on Advising
-## Student–Enrollment–Course:
-Relationship: Enrolled in Cardinality: Many-to-Many Participation: Total on Enrollment
-## Course–Class–Faculty:
-Relationship: Teaches Cardinality: Many-to-Many (each course can be taught in multiple classes, each faculty can teach multiple classes)
-## Course–Department:
-Relationship: Offered by Cardinality: Many-to-One (Each course belongs to one department)
-## Student–Department:
-Relationship: Belongs to Cardinality: Many-to-One
-## Faculty–Department:
-Relationship: Belongs to Cardinality: Many-to-One
-## Class–Course:
-Relationship: Includes Cardinality: Many-to-One
-## Enrollment–Class:
-Relationship: Taught by Not standard; assumes indirect mapping via faculty
+- Belongs to (Student, Department)
+- Enrolls in (Student, Course)
+- Offers (Department, Course)
+- Handled by (Course, Faculty)
+- Has prerequisites (Course, Prerequisite Courses)
+- Belongs to (Faculty, Department)
 
 ## Extension (Prerequisite / Billing):
-## Prerequisite Modeling:
-Could be modeled with a recursive relationship on Course: Relationship: Requires Cardinality: Many-to-Many (a course can have many prerequisites and be a prerequisite for many others)
+- The ER diagram models prerequisites using the has prerequisites relationship connecting Course to the Prerequisite Courses entity. This separate entity stores details like course name and credits for each prerequisite. This design allows a course to have multiple prerequisites, each with specific attributes, avoiding multi-valued attributes in the Course entity. The implied Many-to-Many relationship signifies that one course can have several prerequisites, and a course can be a prerequisite for many others. This approach ensures a flexible and normalized representation of prerequisite dependencies within the database.
 
 ## Design Choices:
-Use of separate entities for Advising, Enrollment, and Class helps normalize many-to-many relationships and maintain relational integrity. Department as a central entity provides a logical way to group students, faculty, and courses.
-
-Class entity includes scheduling details, separating course content from the time/location of delivery.
-
-The design is modular and supports easy extension for future requirements like prerequisites, billing, or attendance.
+The entities in this ER diagram—Student, Department, Course, and Faculty—were chosen as they represent the core organizational units and actors within a typical academic institution. Students are the primary subjects of study, Departments are the administrative and academic groupings, Courses are the units of instruction, and Faculty are the educators and researchers. The relationships model the natural interactions between these entities: students belong to departments and enroll in courses; departments offer courses and faculty belong to and handle them; and courses have prerequisites. The inclusion of "Prerequisite Courses" as a separate entity, linked by the "has prerequisites" relationship, addresses the need to capture potentially multiple and attribute-rich prerequisite information for each course without complicating the main "Course" entity. Key assumptions include that every student and faculty member is associated with one department (total participation), and that the curriculum is structured around courses offered by departments and potentially requiring other courses as prerequisites. The Many-to-Many cardinalities for "enrolls in" and "handled by" reflect the reality that students take multiple courses and faculty teach multiple courses.
 
 ## RESULT
-Thus, the Entity-Relationship (ER) Diagram have been created successfully.
+Thus the ER diagram for the university database is successfully developed.
